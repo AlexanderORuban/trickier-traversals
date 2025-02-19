@@ -128,7 +128,17 @@ public class Traversals {
    * @return true if there exists a strictly increasing root-to-leaf path, false otherwise
    */
   public static boolean hasStrictlyIncreasingPath(TreeNode<Integer> node) {
-    return false;
+    if (node == null) return false;
+
+    if (node.left == null && node.right == null) return true;
+
+    boolean left = false;
+    boolean right = false;
+
+    if (node.left != null && node.left.value > node.value) left = hasStrictlyIncreasingPath(node.left);
+    if (node.right != null && node.right.value > node.value) right = hasStrictlyIncreasingPath(node.right);
+
+    return left || right;
   }
 
   // OPTIONAL CHALLENGE
